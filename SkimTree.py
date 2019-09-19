@@ -17,7 +17,6 @@ import glob
 from multiprocessing import Process
 import multiprocessing as mp
 
-
 isCondor = False
 
 ## user packages
@@ -46,7 +45,7 @@ import analysis_utils as anautil
 ######################################################################################################
 
 
-runInteractive = False
+runInteractive = True
 
 ## ----- start if clock
 
@@ -195,6 +194,7 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_THINjetCHadEF',st_THINjetCHadEF )
 
     outTree.Branch( 'st_THINjetDeltaPhi',st_THINjetDeltaPhi )
+    outTree.Branch( 'st_THINjetMinDeltaPhi',st_THINjetMinDeltaPhi, 'st_THINjetMinDeltaPhi/L' )
 
     outTree.Branch( 'st_THINjetCEmEF',st_THINjetCEmEF )
     outTree.Branch( 'st_THINjetPhoEF',st_THINjetPhoEF )
@@ -524,7 +524,7 @@ def runbbdm(txtfile):
                 fatjetCleanAgainstMu  = anautil.jetcleaning(fatjet_pt200_eta2p5_IDT, mu_pt10_eta2p4_looseID_looseISO, fatjeteta, mueta, fatjetphi, muphi, DRCut)
                 fatjetCleaned = boolutil.logical_AND_List3(fatjet_pt200_eta2p5_IDT, fatjetCleanAgainstEle, fatjetCleanAgainstMu)
                 pass_fatjet_index_cleaned = boolutil.WhereIsTrue(fatjetCleaned)
-                if debug_:print "pass_fatjet_index_cleaned = ", pass_fatjet_index_cleaned," nJets =   ",len(fatjetpx)
+                if debug_:print "pass_fatjet_index_cleaned = ", pass_fatjet_index_cleaned," nJets =   ",len(fatjetPx)
 
             '''
             ********    *        *       *
@@ -686,13 +686,15 @@ def runbbdm(txtfile):
             if debug_:print 'njets: ',len(pass_jet_index_cleaned)
 
 # my modified part
-            minTHINjetDeltaPhi=7 # larger than two pi
+            minTHINjetDeltaPhi=8 # larger than two pi
+            minid=0
             for ithinjet in pass_jet_index_cleaned:
                 ideltaphi=DeltaPhi(ak4phi[ithinjet],metphi_)
                 st_THINjetDeltaPhi.push_back(ideltaphi)
                 if ideltaphi<minTHINjetDeltaPhi:
                     minTHINjetDeltaPhi=ideltaphi
-            #print "min = ",minTHINjetDeltaPhi # for check
+                    minid=ithinjet
+            st_THINjetMinDeltaPhi[0] = minid
 
             st_nfjet[0] = len(pass_fatjet_index_cleaned)
             for ifjet in pass_fatjet_index_cleaned:

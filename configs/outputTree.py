@@ -63,6 +63,7 @@ st_THINjetEleEF                 = ROOT.std.vector('float')()
 st_THINjetMuoEF                 = ROOT.std.vector('float')()
 st_THINjetCorrUnc               = ROOT.std.vector('float')()
 st_THINjetDeltaPhi              = ROOT.std.vector('float')()
+st_THINjetMinDeltaPhi           = array( 'L', [ 0 ] ) # the min deltaphi jet id
 
 st_nfjet                        = array( 'L', [ 0 ] )
 st_fjetPx                       =   ROOT.std.vector('float')()
