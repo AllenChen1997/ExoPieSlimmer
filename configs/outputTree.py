@@ -63,8 +63,8 @@ st_THINjetEleEF                 = ROOT.std.vector('float')()
 st_THINjetMuoEF                 = ROOT.std.vector('float')()
 st_THINjetCorrUnc               = ROOT.std.vector('float')()
 st_THINjetDeltaPhi              = ROOT.std.vector('float')()
-st_THINjetMinDeltaPhi           = array( 'f', [ 0 ] ) # the min deltaphi jet. if no jet, val=-10
-st_THINjetMinDeltaPhiIdx        = array( 'f', [ 0 ] ) # the min deltaphi jet index. if no jet, val=-10
+st_THINjetMinDeltaPhi           = ROOT.std.vector('float')() # the min deltaphi jet. if no jet, val=-10
+st_THINjetMinDeltaPhiIdx        = ROOT.std.vector('int')()# the min deltaphi jet index. if no jet, val=-10
 
 st_nfjet                        = array( 'L', [ 0 ] )
 st_fjetPx                       =   ROOT.std.vector('float')()
@@ -88,8 +88,8 @@ st_fjetN2b2                     =   ROOT.std.vector('float')()
 st_fjetCHSPRMass                =   ROOT.std.vector('float')()
 st_fjetCHSSDMass                =   ROOT.std.vector('float')()
 st_fjetDeltaPhi                 =   ROOT.std.vector('float')()
-st_fjetMinDeltaPhi              =   array( 'f', [ 0 ] ) # the min deltaphi value. if no jet, val=-10
-st_fjetMinDeltaPhiIdx           =   array( 'f', [ 0 ] ) # the min deltaphi jet index. if no jet, val=-10
+st_fjetMinDeltaPhi              =   ROOT.std.vector('float')() # the min deltaphi value. if no jet, val=-10
+st_fjetMinDeltaPhiIdx           =   ROOT.std.vector('int')() # the min deltaphi jet index. if no jet, val=-10
 
 st_nEle                = array( 'L', [ 0 ] ) #ROOT.std.vector('int')()
 st_elePx               = ROOT.std.vector('float')()

@@ -194,8 +194,8 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_THINjetCHadEF',st_THINjetCHadEF )
 
     outTree.Branch( 'st_THINjetDeltaPhi',st_THINjetDeltaPhi )
-    outTree.Branch( 'st_THINjetMinDeltaPhi', st_THINjetMinDeltaPhi, 'st_THINjetMinDeltaPhi/F')
-    outTree.Branch( 'st_THINjetMinDeltaPhiIdx',st_THINjetMinDeltaPhiIdx, 'st_THINjetMinDeltaPhiIdx/F' )
+    outTree.Branch( 'st_THINjetMinDeltaPhi', st_THINjetMinDeltaPhi)
+    outTree.Branch( 'st_THINjetMinDeltaPhiIdx',st_THINjetMinDeltaPhiIdx)
 
     outTree.Branch( 'st_THINjetCEmEF',st_THINjetCEmEF )
     outTree.Branch( 'st_THINjetPhoEF',st_THINjetPhoEF )
@@ -226,8 +226,8 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_fjetCHSSDMass',st_fjetCHSSDMass)
 
     outTree.Branch( 'st_fjetDeltaPhi',st_fjetDeltaPhi)
-    outTree.Branch( 'st_fjetMinDeltaPhi', st_fjetMinDeltaPhi, 'st_fjetMinDeltaPhi/F')
-    outTree.Branch( 'st_fjetMinDeltaPhiIdx', st_fjetMinDeltaPhiIdx, 'st_fjetMinDeltaPhiIdx/F')
+    outTree.Branch( 'st_fjetMinDeltaPhi', st_fjetMinDeltaPhi)
+    outTree.Branch( 'st_fjetMinDeltaPhiIdx', st_fjetMinDeltaPhiIdx)
 
     outTree.Branch( 'st_nEle',st_nEle , 'st_nEle/L')
     outTree.Branch( 'st_elePx', st_elePx  )
@@ -596,6 +596,8 @@ def runbbdm(txtfile):
             st_THINjetNHadEF.clear()
             st_THINjetCHadEF.clear()
             st_THINjetDeltaPhi.clear()
+            st_THINjetMinDeltaPhi.clear()
+            st_THINjetMinDeltaPhiIdx.clear()
 
 
             st_THINjetCEmEF.clear()
@@ -627,7 +629,8 @@ def runbbdm(txtfile):
             st_fjetCHSPRMass.clear()
             st_fjetCHSSDMass.clear()
             st_fjetDeltaPhi.clear()
-            
+            st_fjetMinDeltaPhi.clear()
+            st_fjetMinDeltaPhiIdx.clear()
             '''
             st_Taudisc_againstLooseMuon.clear()
             st_Taudisc_againstTightMuon.clear()
@@ -698,11 +701,8 @@ def runbbdm(txtfile):
                     minTHINjetDeltaPhi=ideltaphi
                     minid=ithinjet
             if minTHINjetDeltaPhi!=10: 
-                st_THINjetMinDeltaPhi[0] = minTHINjetDeltaPhi
-                st_THINjetMinDeltaPhiIdx[0] = minid
-            else:
-                st_THINjetMinDeltaPhi[0] = -10
-                st_THINjetMinDeltaPhiIdx[0] = -10
+                st_THINjetMinDeltaPhi.push_back(minTHINjetDeltaPhi)
+                st_THINjetMinDeltaPhiIdx.push_back(minid)
 
             st_nfjet[0] = len(pass_fatjet_index_cleaned)
             for ifjet in pass_fatjet_index_cleaned:
@@ -738,11 +738,8 @@ def runbbdm(txtfile):
                     minfjetDeltaPhi=ideltaphi
                     minid=ifjet
             if minfjetDeltaPhi!=10:
-                st_fjetMinDeltaPhi[0] = minfjetDeltaPhi
-                st_fjetMinDeltaPhiIdx[0] = minid
-            else:
-                st_fjetMinDeltaPhi[0] = -10
-                st_fjetMinDeltaPhiIdx[0] = -10
+                st_fjetMinDeltaPhi.push_back(minfjetDeltaPhi)
+                st_fjetMinDeltaPhiIdx.push_back(minid)
 
             st_nEle[0] = len(pass_ele_veto_index)
             for iele in pass_ele_veto_index:
