@@ -197,7 +197,7 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_THINjetMinDeltaPhi', st_THINjetMinDeltaPhi)
     outTree.Branch( 'st_THINjetMinDeltaPhiIdx',st_THINjetMinDeltaPhiIdx)
     outTree.Branch( 'st_THINjetMinDeltaPhi_Recoil',st_THINjetMinDeltaPhi_Recoil,'e/F:ee/F:mu/F:mumu/F')
-    outTree.Branch( 'st_THINjetMinDeltaPhiIdx_Recoil',st_THINjetMinDeltaPhi_Recoil,'e_idx/F:ee_idx/F:mu_idx/F:mumu_idx/F')
+    outTree.Branch( 'st_THINjetMinDeltaPhiIdx_Recoil',st_THINjetMinDeltaPhiIdx_Recoil,'e/F:ee/F:mu/F:mumu/F')
 
     outTree.Branch( 'st_THINjetCEmEF',st_THINjetCEmEF )
     outTree.Branch( 'st_THINjetPhoEF',st_THINjetPhoEF )
@@ -601,7 +601,7 @@ def runbbdm(txtfile):
             st_THINjetMinDeltaPhi.clear()
             st_THINjetMinDeltaPhiIdx.clear()
             st_THINjetMinDeltaPhi_Recoil.re()
-            
+            st_THINjetMinDeltaPhiIdx_Recoil.re()
 
             st_THINjetCEmEF.clear()
             st_THINjetPhoEF.clear()
@@ -911,40 +911,41 @@ def runbbdm(txtfile):
                     irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],WenuPhi[0])
                     if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.e:
                         st_THINjetMinDeltaPhi_Recoil.e=irecoil_deltaphi
-                        st_THINjetMinDeltaPhi_Recoil.e_idx=ithinjet
+                        st_THINjetMinDeltaPhiIdx_Recoil.e=ithinjet
                 # single mu
                 if WenuPhi[0]!=-10.:
                     irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],WmunuPhi[0])
                     if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.mu:
                         st_THINjetMinDeltaPhi_Recoil.mu=irecoil_deltaphi
-                        st_THINjetMinDeltaPhi_Recoil.mu_idx=ithinjet
+                        st_THINjetMinDeltaPhiIdx_Recoil.mu=ithinjet
                 # di-ele
                 if WenuPhi[0]!=-10.:
                     irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZeePhi[0])
                     if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.ee:
                         st_THINjetMinDeltaPhi_Recoil.ee=irecoil_deltaphi
-                        st_THINjetMinDeltaPhi_Recoil.ee_idx=ithinjet
+                        st_THINjetMinDeltaPhiIdx_Recoil.ee=ithinjet
                 # di-mumu
                 if WenuPhi[0]!=-10.:
                     irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZmumuPhi[0])
                     if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.mumu:
                         st_THINjetMinDeltaPhi_Recoil.mumu=irecoil_deltaphi
-                        st_THINjetMinDeltaPhi_Recoil.mumu_idx=ithinjet
+                        st_THINjetMinDeltaPhiIdx_Recoil.mumu=ithinjet
                 ideltaphi=DeltaPhi(ak4phi[ithinjet],metphi_)
                 st_THINjetDeltaPhi.push_back(ideltaphi)
+                # MET
                 if ideltaphi<minTHINjetDeltaPhi:
                     minTHINjetDeltaPhi=ideltaphi
                     minid=ithinjet
             if minTHINjetDeltaPhi!=10: 
                 st_THINjetMinDeltaPhi.push_back(minTHINjetDeltaPhi)
                 st_THINjetMinDeltaPhiIdx.push_back(minid)
-            if st_THINjetMinDeltaPhi_Recoil.e_idx==-10.:
+            if st_THINjetMinDeltaPhiIdx_Recoil.e==-10.:
                 st_THINjetMinDeltaPhi_Recoil.e=-10.
-            if st_THINjetMinDeltaPhi_Recoil.ee_idx==-10.:
+            if st_THINjetMinDeltaPhiIdx_Recoil.ee==-10.:
                 st_THINjetMinDeltaPhi_Recoil.ee=-10.
-            if st_THINjetMinDeltaPhi_Recoil.mu_idx==-10.:
+            if st_THINjetMinDeltaPhiIdx_Recoil.mu==-10.:
                 st_THINjetMinDeltaPhi_Recoil.mu=-10.
-            if st_THINjetMinDeltaPhi_Recoil.mumu_idx==-10.:
+            if st_THINjetMinDeltaPhiIdx_Recoil.mumu==-10.:
                 st_THINjetMinDeltaPhi_Recoil.mumu=-10.
 
             # fat jet

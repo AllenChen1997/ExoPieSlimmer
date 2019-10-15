@@ -16,19 +16,24 @@ import time
 gROOT.ProcessLine(
 "struct DeltaphiRecoils {\
    float e, ee, mu, mumu;\
-   float ee_idx, e_idx, mu_idx, mumu_idx;\
    void re() {\
    	e        = 10.;\
    	ee       = 10.;\
    	mu       = 10.;\
    	mumu     = 10.;\
-   	e_idx    = -10;\
-   	ee_idx   = -10;\
-   	mu_idx   = -10;\
-   	mumu_idx = -10;\
    }\
 };" );
-from ROOT import DeltaphiRecoils
+gROOT.ProcessLine(
+"struct DeltaphiRecoils_idx {\
+   float ee, e, mu, mumu;\
+   void re() {\
+   	e    = -10;\
+   	ee   = -10;\
+   	mu   = -10;\
+   	mumu = -10;\
+   }\
+};" );
+from ROOT import DeltaphiRecoils, DeltaphiRecoils_idx
 
 
 '''
@@ -85,6 +90,7 @@ st_THINjetDeltaPhi              = ROOT.std.vector('float')()
 st_THINjetMinDeltaPhi           = ROOT.std.vector('float')() 
 st_THINjetMinDeltaPhiIdx        = ROOT.std.vector('int')()
 st_THINjetMinDeltaPhi_Recoil    = DeltaphiRecoils()
+st_THINjetMinDeltaPhiIdx_Recoil = DeltaphiRecoils_idx()
 
 st_nfjet                        = array( 'L', [ 0 ] )
 st_fjetPx                       =   ROOT.std.vector('float')()
