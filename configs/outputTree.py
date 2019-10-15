@@ -12,6 +12,25 @@ from pandas import  DataFrame, concat
 from pandas import Series
 import time
 
+# for deltaphi of recoil
+gROOT.ProcessLine(
+"struct DeltaphiRecoils {\
+   float e, ee, mu, mumu;\
+   int ee_idx, e_idx, mu_idx, mumu_idx;\
+   void re() {\
+   	e        = 10.\
+   	ee       = 10.\
+   	mu       = 10.\
+   	mumu     = 10.\
+   	e_idx    = -10\
+   	ee_idx   = -10\
+   	mu_idx   = -10\
+   	mumu_idx = -10\
+   }\
+};" );
+from ROOT import DeltaphiRecoils
+
+
 '''
 outfilenameis=(open('configs/outfilename.txt')).readline()
 
@@ -63,8 +82,9 @@ st_THINjetEleEF                 = ROOT.std.vector('float')()
 st_THINjetMuoEF                 = ROOT.std.vector('float')()
 st_THINjetCorrUnc               = ROOT.std.vector('float')()
 st_THINjetDeltaPhi              = ROOT.std.vector('float')()
-st_THINjetMinDeltaPhi           = ROOT.std.vector('float')() # the min deltaphi jet. if no jet, val=-10
-st_THINjetMinDeltaPhiIdx        = ROOT.std.vector('int')()# the min deltaphi jet index. if no jet, val=-10
+st_THINjetMinDeltaPhi           = ROOT.std.vector('float')() 
+st_THINjetMinDeltaPhiIdx        = ROOT.std.vector('int')()
+st_THINjetMinDeltaPhi_Recoil    = DeltaphiRecoils()
 
 st_nfjet                        = array( 'L', [ 0 ] )
 st_fjetPx                       =   ROOT.std.vector('float')()
@@ -88,8 +108,8 @@ st_fjetN2b2                     =   ROOT.std.vector('float')()
 st_fjetCHSPRMass                =   ROOT.std.vector('float')()
 st_fjetCHSSDMass                =   ROOT.std.vector('float')()
 st_fjetDeltaPhi                 =   ROOT.std.vector('float')()
-st_fjetMinDeltaPhi              =   ROOT.std.vector('float')() # the min deltaphi value. if no jet, val=-10
-st_fjetMinDeltaPhiIdx           =   ROOT.std.vector('int')() # the min deltaphi jet index. if no jet, val=-10
+st_fjetMinDeltaPhi              =   ROOT.std.vector('float')() 
+st_fjetMinDeltaPhiIdx           =   ROOT.std.vector('int')() 
 
 st_nEle                = array( 'L', [ 0 ] ) #ROOT.std.vector('int')()
 st_elePx               = ROOT.std.vector('float')()

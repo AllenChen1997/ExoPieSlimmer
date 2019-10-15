@@ -196,6 +196,7 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_THINjetDeltaPhi',st_THINjetDeltaPhi )
     outTree.Branch( 'st_THINjetMinDeltaPhi', st_THINjetMinDeltaPhi)
     outTree.Branch( 'st_THINjetMinDeltaPhiIdx',st_THINjetMinDeltaPhiIdx)
+    outTree.Branch( 'st_THINjetMinDeltaPhi_Recoil',st_THINjetMinDeltaPhi_Recoil,'e/F:ee/F:mu/F:mumu/F')
 
     outTree.Branch( 'st_THINjetCEmEF',st_THINjetCEmEF )
     outTree.Branch( 'st_THINjetPhoEF',st_THINjetPhoEF )
@@ -598,7 +599,8 @@ def runbbdm(txtfile):
             st_THINjetDeltaPhi.clear()
             st_THINjetMinDeltaPhi.clear()
             st_THINjetMinDeltaPhiIdx.clear()
-
+            st_THINjetMinDeltaPhi_Recoil.re()
+            
 
             st_THINjetCEmEF.clear()
             st_THINjetPhoEF.clear()
@@ -691,18 +693,7 @@ def runbbdm(txtfile):
                 st_THINjetCorrUnc.push_back(ak4JEC_[ithinjet])
             if debug_:print 'njets: ',len(pass_jet_index_cleaned)
 
-# my modified part
-            minTHINjetDeltaPhi=10 # larger than two pi
-            minid=0
-            for ithinjet in pass_jet_index_cleaned:
-                ideltaphi=DeltaPhi(ak4phi[ithinjet],metphi_)
-                st_THINjetDeltaPhi.push_back(ideltaphi)
-                if ideltaphi<minTHINjetDeltaPhi:
-                    minTHINjetDeltaPhi=ideltaphi
-                    minid=ithinjet
-            if minTHINjetDeltaPhi!=10: 
-                st_THINjetMinDeltaPhi.push_back(minTHINjetDeltaPhi)
-                st_THINjetMinDeltaPhiIdx.push_back(minid)
+
 
             st_nfjet[0] = len(pass_fatjet_index_cleaned)
             for ifjet in pass_fatjet_index_cleaned:
@@ -728,18 +719,6 @@ def runbbdm(txtfile):
                 st_fjetCHSSDMass.push_back(fatjetCHSSDmassL2L3Corr[ifjet])
                 #print ("fatN2_Beta1_",fatN2_Beta1_[ifjet],"fatN2_Beta2_",fatN2_Beta2_[ifjet])
 
-# my modified part
-            minfjetDeltaPhi=10 # larger than two pi
-            minid=[]
-            for ifjet in pass_fatjet_index_cleaned:
-                ideltaphi=DeltaPhi(fatjetphi[ifjet],metphi_)
-                st_fjetDeltaPhi.push_back(ideltaphi)
-                if ideltaphi<minfjetDeltaPhi:
-                    minfjetDeltaPhi=ideltaphi
-                    minid=ifjet
-            if minfjetDeltaPhi!=10:
-                st_fjetMinDeltaPhi.push_back(minfjetDeltaPhi)
-                st_fjetMinDeltaPhiIdx.push_back(minid)
 
             st_nEle[0] = len(pass_ele_veto_index)
             for iele in pass_ele_veto_index:
@@ -919,6 +898,60 @@ def runbbdm(txtfile):
             GammaRecoilStatus = (GammaRecoil[0] > 170)
             if debug_: print 'Reached Gamma CR'
             #if pfmetstatus==False and ZRecoilstatus==False and WRecoilstatus==False and GammaRecoilStatus==False: continue
+            
+# my modified part # for the delta phi between jet and (MET or RECOIL)
+            # thin jet
+            minTHINjetDeltaPhi=10 # larger than two pi
+            minid=[]
+            
+            for ithinjet in pass_jet_index_cleaned:
+                # single ele
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],WenuPhi[0])
+                    if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.e:
+                        st_THINjetMinDeltaPhi_Recoil.e=irecoil_deltaphi
+                        st_THINjetMinDeltaPhi_Recoil.e_idx=ithinjet
+                # single mu
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],WmunuPhi[0])
+                    if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.mu:
+                        st_THINjetMinDeltaPhi_Recoil.mu=irecoil_deltaphi
+                        st_THINjetMinDeltaPhi_Recoil.mu_idx=ithinjet
+                # di-ele
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZeePhi[0])
+                    if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.ee:
+                        st_THINjetMinDeltaPhi_Recoil.ee=irecoil_deltaphi
+                        st_THINjetMinDeltaPhi_Recoil.ee_idx=ithinjet
+                # di-mumu
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZmumuPhi[0])
+                    if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.mumu:
+                        st_THINjetMinDeltaPhi_Recoil.mumu=irecoil_deltaphi
+                        st_THINjetMinDeltaPhi_Recoil.mumu_idx=ithinjet
+                ideltaphi=DeltaPhi(ak4phi[ithinjet],metphi_)
+                st_THINjetDeltaPhi.push_back(ideltaphi)
+                if ideltaphi<minTHINjetDeltaPhi:
+                    minTHINjetDeltaPhi=ideltaphi
+                    minid=ithinjet
+            if minTHINjetDeltaPhi!=10: 
+                st_THINjetMinDeltaPhi.push_back(minTHINjetDeltaPhi)
+                st_THINjetMinDeltaPhiIdx.push_back(minid)
+
+            # fat jet
+            minfjetDeltaPhi=10 # larger than two pi
+            minid=[]
+            for ifjet in pass_fatjet_index_cleaned:
+                ideltaphi=DeltaPhi(fatjetphi[ifjet],metphi_)
+                st_fjetDeltaPhi.push_back(ideltaphi)
+                if ideltaphi<minfjetDeltaPhi:
+                    minfjetDeltaPhi=ideltaphi
+                    minid=ifjet
+            if minfjetDeltaPhi!=10:
+                st_fjetMinDeltaPhi.push_back(minfjetDeltaPhi)
+                st_fjetMinDeltaPhiIdx.push_back(minid)     
+# my modified part #            
+            
             outTree.Fill()
 
     #outfile = TFile(outfilenameis,'RECREATE')
