@@ -16,16 +16,16 @@ import time
 gROOT.ProcessLine(
 "struct DeltaphiRecoils {\
    float e, ee, mu, mumu;\
-   int ee_idx, e_idx, mu_idx, mumu_idx;\
+   float ee_idx, e_idx, mu_idx, mumu_idx;\
    void re() {\
-   	e        = 10.\
-   	ee       = 10.\
-   	mu       = 10.\
-   	mumu     = 10.\
-   	e_idx    = -10\
-   	ee_idx   = -10\
-   	mu_idx   = -10\
-   	mumu_idx = -10\
+   	e        = 10.;\
+   	ee       = 10.;\
+   	mu       = 10.;\
+   	mumu     = 10.;\
+   	e_idx    = -10;\
+   	ee_idx   = -10;\
+   	mu_idx   = -10;\
+   	mumu_idx = -10;\
    }\
 };" );
 from ROOT import DeltaphiRecoils
