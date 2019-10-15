@@ -12,30 +12,6 @@ from pandas import  DataFrame, concat
 from pandas import Series
 import time
 
-# for deltaphi of recoil
-gROOT.ProcessLine(
-"struct DeltaphiRecoils {\
-   float e, ee, mu, mumu;\
-   void re() {\
-   	e        = 10.;\
-   	ee       = 10.;\
-   	mu       = 10.;\
-   	mumu     = 10.;\
-   }\
-};" );
-gROOT.ProcessLine(
-"struct DeltaphiRecoils_idx {\
-   float ee, e, mu, mumu;\
-   void re() {\
-   	e    = -10;\
-   	ee   = -10;\
-   	mu   = -10;\
-   	mumu = -10;\
-   }\
-};" );
-from ROOT import DeltaphiRecoils, DeltaphiRecoils_idx
-
-
 '''
 outfilenameis=(open('configs/outfilename.txt')).readline()
 
@@ -89,8 +65,14 @@ st_THINjetCorrUnc               = ROOT.std.vector('float')()
 st_THINjetDeltaPhi              = ROOT.std.vector('float')()
 st_THINjetMinDeltaPhi           = ROOT.std.vector('float')() 
 st_THINjetMinDeltaPhiIdx        = ROOT.std.vector('int')()
-st_THINjetMinDeltaPhi_Recoil    = DeltaphiRecoils()
-st_THINjetMinDeltaPhiIdx_Recoil = DeltaphiRecoils_idx()
+st_THINjetMinDeltaPhi_Recoile        = ROOT.std.vector('float')() 
+st_THINjetMinDeltaPhiIdx_Recoile     = ROOT.std.vector('int')()
+st_THINjetMinDeltaPhi_Recoilee       = ROOT.std.vector('float')() 
+st_THINjetMinDeltaPhiIdx_Recoilee    = ROOT.std.vector('int')()
+st_THINjetMinDeltaPhi_Recoilmu       = ROOT.std.vector('float')() 
+st_THINjetMinDeltaPhiIdx_Recoilmu    = ROOT.std.vector('int')()
+st_THINjetMinDeltaPhi_Recoilmumu     = ROOT.std.vector('float')() 
+st_THINjetMinDeltaPhiIdx_Recoilmumu  = ROOT.std.vector('int')()
 
 st_nfjet                        = array( 'L', [ 0 ] )
 st_fjetPx                       =   ROOT.std.vector('float')()
@@ -116,6 +98,14 @@ st_fjetCHSSDMass                =   ROOT.std.vector('float')()
 st_fjetDeltaPhi                 =   ROOT.std.vector('float')()
 st_fjetMinDeltaPhi              =   ROOT.std.vector('float')() 
 st_fjetMinDeltaPhiIdx           =   ROOT.std.vector('int')() 
+st_fjetMinDeltaPhi_Recoile        = ROOT.std.vector('float')() 
+st_fjetMinDeltaPhiIdx_Recoile     = ROOT.std.vector('int')()
+st_fjetMinDeltaPhi_Recoilee       = ROOT.std.vector('float')() 
+st_fjetMinDeltaPhiIdx_Recoilee    = ROOT.std.vector('int')()
+st_fjetMinDeltaPhi_Recoilmu       = ROOT.std.vector('float')() 
+st_fjetMinDeltaPhiIdx_Recoilmu    = ROOT.std.vector('int')()
+st_fjetMinDeltaPhi_Recoilmumu     = ROOT.std.vector('float')() 
+st_fjetMinDeltaPhiIdx_Recoilmumu  = ROOT.std.vector('int')()
 
 st_nEle                = array( 'L', [ 0 ] ) #ROOT.std.vector('int')()
 st_elePx               = ROOT.std.vector('float')()

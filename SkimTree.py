@@ -196,8 +196,14 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_THINjetDeltaPhi',st_THINjetDeltaPhi )
     outTree.Branch( 'st_THINjetMinDeltaPhi', st_THINjetMinDeltaPhi)
     outTree.Branch( 'st_THINjetMinDeltaPhiIdx',st_THINjetMinDeltaPhiIdx)
-    outTree.Branch( 'st_THINjetMinDeltaPhi_Recoil',st_THINjetMinDeltaPhi_Recoil,'e/F:ee/F:mu/F:mumu/F')
-    outTree.Branch( 'st_THINjetMinDeltaPhiIdx_Recoil',st_THINjetMinDeltaPhiIdx_Recoil,'e/F:ee/F:mu/F:mumu/F')
+    outTree.Branch( 'st_THINjetMinDeltaPhi_Recoile',st_THINjetMinDeltaPhi_Recoile)
+    outTree.Branch( 'st_THINjetMinDeltaPhiIdx_Recoile',st_THINjetMinDeltaPhiIdx_Recoile)
+    outTree.Branch( 'st_THINjetMinDeltaPhi_Recoilee',st_THINjetMinDeltaPhi_Recoilee)
+    outTree.Branch( 'st_THINjetMinDeltaPhiIdx_Recoilee',st_THINjetMinDeltaPhiIdx_Recoilee)
+    outTree.Branch( 'st_THINjetMinDeltaPhi_Recoilmu',st_THINjetMinDeltaPhi_Recoilmu)
+    outTree.Branch( 'st_THINjetMinDeltaPhiIdx_Recoilmu',st_THINjetMinDeltaPhiIdx_Recoilmu)
+    outTree.Branch( 'st_THINjetMinDeltaPhi_Recoilmumu',st_THINjetMinDeltaPhi_Recoilmumu)
+    outTree.Branch( 'st_THINjetMinDeltaPhiIdx_Recoilmumu',st_THINjetMinDeltaPhiIdx_Recoilmumu)    
 
     outTree.Branch( 'st_THINjetCEmEF',st_THINjetCEmEF )
     outTree.Branch( 'st_THINjetPhoEF',st_THINjetPhoEF )
@@ -230,7 +236,15 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_fjetDeltaPhi',st_fjetDeltaPhi)
     outTree.Branch( 'st_fjetMinDeltaPhi', st_fjetMinDeltaPhi)
     outTree.Branch( 'st_fjetMinDeltaPhiIdx', st_fjetMinDeltaPhiIdx)
-
+    outTree.Branch( 'st_fjetMinDeltaPhi_Recoile', st_fjetMinDeltaPhi_Recoile)
+    outTree.Branch( 'st_fjetMinDeltaPhiIdx_Recoile', st_fjetMinDeltaPhiIdx_Recoile)
+    outTree.Branch( 'st_fjetMinDeltaPhi_Recoilee', st_fjetMinDeltaPhi_Recoilee)
+    outTree.Branch( 'st_fjetMinDeltaPhiIdx_Recoilee', st_fjetMinDeltaPhiIdx_Recoilee)
+    outTree.Branch( 'st_fjetMinDeltaPhi_Recoilmu', st_fjetMinDeltaPhi_Recoilmu)
+    outTree.Branch( 'st_fjetMinDeltaPhiIdx_Recoilmu', st_fjetMinDeltaPhiIdx_Recoilmu)
+    outTree.Branch( 'st_fjetMinDeltaPhi_Recoilmumu', st_fjetMinDeltaPhi_Recoilmumu)
+    outTree.Branch( 'st_fjetMinDeltaPhiIdx_Recoilmumu', st_fjetMinDeltaPhiIdx_Recoilmumu)
+    
     outTree.Branch( 'st_nEle',st_nEle , 'st_nEle/L')
     outTree.Branch( 'st_elePx', st_elePx  )
     outTree.Branch( 'st_elePy' , st_elePy )
@@ -600,8 +614,15 @@ def runbbdm(txtfile):
             st_THINjetDeltaPhi.clear()
             st_THINjetMinDeltaPhi.clear()
             st_THINjetMinDeltaPhiIdx.clear()
-            st_THINjetMinDeltaPhi_Recoil.re()
-            st_THINjetMinDeltaPhiIdx_Recoil.re()
+            st_THINjetMinDeltaPhi_Recoile.clear()
+            st_THINjetMinDeltaPhiIdx_RecoilE.clear()
+            st_THINjetMinDeltaPhi_Recoilee.clear()
+            st_THINjetMinDeltaPhiIdx_Recoilee.clear()
+            st_THINjetMinDeltaPhi_Recoilmu.clear()
+            st_THINjetMinDeltaPhiIdx_Recoilmu.clear()
+            st_THINjetMinDeltaPhi_Recoilmumu.clear()
+            st_THINjetMinDeltaPhiIdx_Recoilmumu.clear()
+
 
             st_THINjetCEmEF.clear()
             st_THINjetPhoEF.clear()
@@ -634,6 +655,15 @@ def runbbdm(txtfile):
             st_fjetDeltaPhi.clear()
             st_fjetMinDeltaPhi.clear()
             st_fjetMinDeltaPhiIdx.clear()
+            st_fjetMinDeltaPhi_Recoile.clear()
+            st_fjetMinDeltaPhiIdx_Recoile.clear()
+            st_fjetMinDeltaPhi_Recoilee.clear()
+            st_fjetMinDeltaPhiIdx_Recoilee.clear()
+            st_fjetMinDeltaPhi_Recoilmu.clear()
+            st_fjetMinDeltaPhiIdx_Recoilmu.clear()
+            st_fjetMinDeltaPhi_Recoilmumu.clear()
+            st_fjetMinDeltaPhiIdx_Recoilmumu.clear()
+            
             '''
             st_Taudisc_againstLooseMuon.clear()
             st_Taudisc_againstTightMuon.clear()
@@ -903,63 +933,122 @@ def runbbdm(txtfile):
 # my modified part # for the delta phi between jet and (MET or RECOIL)
             # thin jet
             minTHINjetDeltaPhi=10 # larger than two pi
-            minid=[]
+            minE=10
+            minEE=10
+            minMu=10
+            minMuMu=10
             
+            minid=[]
+            idE=[]
+            idEE=[]
+            idMu=[]
+            idMuMu=[]
             for ithinjet in pass_jet_index_cleaned:
-                # single ele
-                if WenuPhi[0]!=-10.:
-                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],WenuPhi[0])
-                    if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.e:
-                        st_THINjetMinDeltaPhi_Recoil.e=irecoil_deltaphi
-                        st_THINjetMinDeltaPhiIdx_Recoil.e=ithinjet
-                # single mu
-                if WenuPhi[0]!=-10.:
-                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],WmunuPhi[0])
-                    if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.mu:
-                        st_THINjetMinDeltaPhi_Recoil.mu=irecoil_deltaphi
-                        st_THINjetMinDeltaPhiIdx_Recoil.mu=ithinjet
-                # di-ele
-                if WenuPhi[0]!=-10.:
-                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZeePhi[0])
-                    if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.ee:
-                        st_THINjetMinDeltaPhi_Recoil.ee=irecoil_deltaphi
-                        st_THINjetMinDeltaPhiIdx_Recoil.ee=ithinjet
-                # di-mumu
-                if WenuPhi[0]!=-10.:
-                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZmumuPhi[0])
-                    if irecoil_deltaphi<st_THINjetMinDeltaPhi_Recoil.mumu:
-                        st_THINjetMinDeltaPhi_Recoil.mumu=irecoil_deltaphi
-                        st_THINjetMinDeltaPhiIdx_Recoil.mumu=ithinjet
+                # MET
                 ideltaphi=DeltaPhi(ak4phi[ithinjet],metphi_)
                 st_THINjetDeltaPhi.push_back(ideltaphi)
-                # MET
                 if ideltaphi<minTHINjetDeltaPhi:
                     minTHINjetDeltaPhi=ideltaphi
                     minid=ithinjet
+                # single ele
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],WenuPhi[0])
+                    if irecoil_deltaphi<minE:
+                        minE=irecoil_deltaphi
+                        idE=ithinjet
+                # single mu
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],WmunuPhi[0])
+                    if irecoil_deltaphi<minMu:
+                        minMu=irecoil_deltaphi
+                        idMu=ithinjet
+                # di-ele
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZeePhi[0])
+                    if irecoil_deltaphi<minEE:
+                        minEE=irecoil_deltaphi
+                        idEE=ithinjet
+                # di-mumu
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZmumuPhi[0])
+                    if irecoil_deltaphi<minMuMu:
+                        minMuMu=irecoil_deltaphi
+                        idMuMu=ithinjet
             if minTHINjetDeltaPhi!=10: 
                 st_THINjetMinDeltaPhi.push_back(minTHINjetDeltaPhi)
                 st_THINjetMinDeltaPhiIdx.push_back(minid)
-            if st_THINjetMinDeltaPhiIdx_Recoil.e==-10.:
-                st_THINjetMinDeltaPhi_Recoil.e=-10.
-            if st_THINjetMinDeltaPhiIdx_Recoil.ee==-10.:
-                st_THINjetMinDeltaPhi_Recoil.ee=-10.
-            if st_THINjetMinDeltaPhiIdx_Recoil.mu==-10.:
-                st_THINjetMinDeltaPhi_Recoil.mu=-10.
-            if st_THINjetMinDeltaPhiIdx_Recoil.mumu==-10.:
-                st_THINjetMinDeltaPhi_Recoil.mumu=-10.
+            if minE!=10:
+                st_THINjetMinDeltaPhi_Recoile.push_back(minE)
+                st_THINjetMinDeltaPhiIdx_Recoile.push_back(idE)
+            if minEE!=10:
+                st_THINjetMinDeltaPhi_Recoilee.push_back(minEE)
+                st_THINjetMinDeltaPhiIdx_Recoilee.push_back(idEE)
+            if minMu!=10:
+                st_THINjetMinDeltaPhi_Recoilmu.push_back(minMu)
+                st_THINjetMinDeltaPhiIdx_Recoilmu.push_back(idMu)
+            if minMuMu!=10:
+                st_THINjetMinDeltaPhi_Recoilmumu.push_back(minMuMu)
+                st_THINjetMinDeltaPhiIdx_Recoilmumu.push_back(idMuMu)
 
             # fat jet
             minfjetDeltaPhi=10 # larger than two pi
+            minE=10
+            minEE=10
+            minMu=10
+            minMuMu=10
+            
             minid=[]
+            idE=[]
+            idEE=[]
+            idMu=[]
+            idMuMu=[]
             for ifjet in pass_fatjet_index_cleaned:
+                # MET
                 ideltaphi=DeltaPhi(fatjetphi[ifjet],metphi_)
                 st_fjetDeltaPhi.push_back(ideltaphi)
                 if ideltaphi<minfjetDeltaPhi:
                     minfjetDeltaPhi=ideltaphi
                     minid=ifjet
+                # single ele
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(fatjetphi[ifjet],WenuPhi[0])
+                    if irecoil_deltaphi<minE:
+                        minE=irecoil_deltaphi
+                        idE=ifjet
+                # single mu
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(fatjetphi[ifjet],WmunuPhi[0])
+                    if irecoil_deltaphi<minMu:
+                        minMu=irecoil_deltaphi
+                        idMu=ifjet
+                # di-ele
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(fatjetphi[ifjet],ZeePhi[0])
+                    if irecoil_deltaphi<minEE:
+                        minEE=irecoil_deltaphi
+                        idEE=ifjet
+                # di-mumu
+                if WenuPhi[0]!=-10.:
+                    irecoil_deltaphi=DeltaPhi(fatjetphi[ifjet],ZmumuPhi[0])
+                    if irecoil_deltaphi<minMuMu:
+                        minMuMu=irecoil_deltaphi
+                        idMuMu=ifjet
             if minfjetDeltaPhi!=10:
                 st_fjetMinDeltaPhi.push_back(minfjetDeltaPhi)
-                st_fjetMinDeltaPhiIdx.push_back(minid)     
+                st_fjetMinDeltaPhiIdx.push_back(minid) 
+            if minE!=10:
+                st_fjetMinDeltaPhi_Recoile.push_back(minE)
+                st_fjetMinDeltaPhiIdx_Recoile.push_back(idE)
+            if minEE!=10:
+                st_fjetMinDeltaPhi_Recoilee.push_back(minEE)
+                st_fjetMinDeltaPhiIdx_Recoilee.push_back(idEE)
+            if minMu!=10:
+                st_fjetMinDeltaPhi_Recoilmu.push_back(minMu)
+                st_fjetMinDeltaPhiIdx_Recoilmu.push_back(idMu)
+            if minMuMu!=10:
+                st_fjetMinDeltaPhi_Recoilmumu.push_back(minMuMu)
+                st_fjetMinDeltaPhiIdx_Recoilmumu.push_back(idMuMu)
+    
 # my modified part #            
             
             outTree.Fill()
