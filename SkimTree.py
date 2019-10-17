@@ -615,7 +615,7 @@ def runbbdm(txtfile):
             st_THINjetMinDeltaPhi.clear()
             st_THINjetMinDeltaPhiIdx.clear()
             st_THINjetMinDeltaPhi_Recoile.clear()
-            st_THINjetMinDeltaPhiIdx_RecoilE.clear()
+            st_THINjetMinDeltaPhiIdx_Recoile.clear()
             st_THINjetMinDeltaPhi_Recoilee.clear()
             st_THINjetMinDeltaPhiIdx_Recoilee.clear()
             st_THINjetMinDeltaPhi_Recoilmu.clear()
@@ -957,19 +957,19 @@ def runbbdm(txtfile):
                         minE=irecoil_deltaphi
                         idE=ithinjet
                 # single mu
-                if WenuPhi[0]!=-10.:
+                if WmunuPhi[0]!=-10.:
                     irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],WmunuPhi[0])
                     if irecoil_deltaphi<minMu:
                         minMu=irecoil_deltaphi
                         idMu=ithinjet
                 # di-ele
-                if WenuPhi[0]!=-10.:
+                if ZeePhi[0]!=-10.:
                     irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZeePhi[0])
                     if irecoil_deltaphi<minEE:
                         minEE=irecoil_deltaphi
                         idEE=ithinjet
                 # di-mumu
-                if WenuPhi[0]!=-10.:
+                if ZmumuPhi[0]!=-10.:
                     irecoil_deltaphi=DeltaPhi(ak4phi[ithinjet],ZmumuPhi[0])
                     if irecoil_deltaphi<minMuMu:
                         minMuMu=irecoil_deltaphi
@@ -1016,19 +1016,19 @@ def runbbdm(txtfile):
                         minE=irecoil_deltaphi
                         idE=ifjet
                 # single mu
-                if WenuPhi[0]!=-10.:
+                if WmunuPhi[0]!=-10.:
                     irecoil_deltaphi=DeltaPhi(fatjetphi[ifjet],WmunuPhi[0])
                     if irecoil_deltaphi<minMu:
                         minMu=irecoil_deltaphi
                         idMu=ifjet
                 # di-ele
-                if WenuPhi[0]!=-10.:
+                if ZeePhi[0]!=-10.:
                     irecoil_deltaphi=DeltaPhi(fatjetphi[ifjet],ZeePhi[0])
                     if irecoil_deltaphi<minEE:
                         minEE=irecoil_deltaphi
                         idEE=ifjet
                 # di-mumu
-                if WenuPhi[0]!=-10.:
+                if ZmumuPhi[0]!=-10.:
                     irecoil_deltaphi=DeltaPhi(fatjetphi[ifjet],ZmumuPhi[0])
                     if irecoil_deltaphi<minMuMu:
                         minMuMu=irecoil_deltaphi
