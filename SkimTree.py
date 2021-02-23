@@ -342,7 +342,8 @@ def runbbdm(txtfile):
     outTree.Branch('st_fjetTau21', st_fjetTau21)
     outTree.Branch('st_fjetCHSPRMass', st_fjetCHSPRMass)
     outTree.Branch('st_fjetCHSSDMass', st_fjetCHSSDMass)
-
+    outTree.Branch( 'st_fjetParticleNET',st_fjetParticleNET)
+    
     outTree.Branch('st_nEle', st_nEle, 'st_nEle/L')
     outTree.Branch('st_elePx', st_elePx)
     outTree.Branch('st_elePy', st_elePy)
@@ -489,7 +490,7 @@ def runbbdm(txtfile):
                           df.THINnJet, df.THINjetPx, df.THINjetPy, df.THINjetPz, df.THINjetEnergy, df.THINbRegNNResolution, df.THINbRegNNCorr,df.THINisPUJetIDLoose,df.THINisPUJetIDMedium,df.THINisPUJetIDTight,
                           df.THINjetPassIDLoose, df.THINjetDeepCSV_b, df.THINjetHadronFlavor, df.THINjetCEmEF, df.THINjetCHadEF, df.THINjetNEmEF, df.THINjetNHadEF, df.THINjetCMulti, df.THINjetNMultiplicity, df.THINjetCorrUncUp, df.THINjetNPV,
                           df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy, df.FATgenjetpx, df.FATgenjetpy, df.FATgenjetpz, df.FATgenjetE, df.FATjetPassIDLoose,
-                          df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,
+                          df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc, df.FATjet_particleNet,
                           df.FATjet_prob_bbvsLight, df.FATjet_prob_ccvsLight, df.FATjet_prob_TvsQCD, df.FATjet_prob_WvsQCD, df.FATjet_prob_ZHbbvsQCD,
                           df.FATjetSDmass, df.FATN2_Beta1_, df.FATN2_Beta2_, df.FATjetCHSPRmassL2L3Corr, df.FATjetCHSSDmassL2L3Corr, df.FATjetTau1, df.FATjetTau2)
         elif runOn2017:
@@ -511,7 +512,7 @@ def runbbdm(txtfile):
                           df.THINnJet, df.THINjetPx, df.THINjetPy, df.THINjetPz, df.THINjetEnergy, df.THINbRegNNResolution, df.THINbRegNNCorr,df.THINisPUJetIDLoose,df.THINisPUJetIDMedium,df.THINisPUJetIDTight,
                           df.THINjetPassIDTight, df.THINjetDeepCSV_b, df.THINjetHadronFlavor, df.THINjetCEmEF, df.THINjetCHadEF, df.THINjetNEmEF, df.THINjetNHadEF, df.THINjetCMulti, df.THINjetNMultiplicity, df.THINjetCorrUncUp, df.THINjetNPV,
                           df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy, df.FATgenjetpx, df.FATgenjetpy, df.FATgenjetpz, df.FATgenjetE, df.FATjetPassIDTight,
-                          df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,
+                          df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc, df.FATjet_particleNet,
                           df.FATjet_prob_bbvsLight, df.FATjet_prob_ccvsLight, df.FATjet_prob_TvsQCD, df.FATjet_prob_WvsQCD, df.FATjet_prob_ZHbbvsQCD,
                           df.FATjetSDmass, df.FATN2_Beta1_, df.FATN2_Beta2_, df.FATjetCHSPRmassL2L3Corr, df.FATjetCHSSDmassL2L3Corr, df.FATjetTau1, df.FATjetTau2)
         elif runOn2018:
@@ -536,7 +537,7 @@ def runbbdm(txtfile):
                           df.THINnJet, df.THINjetPx, df.THINjetPy, df.THINjetPz, df.THINjetEnergy, df.THINbRegNNResolution, df.THINbRegNNCorr,df.THINisPUJetIDLoose,df.THINisPUJetIDMedium,df.THINisPUJetIDTight,
                           df.THINjetPassIDTight, df.THINjetDeepCSV_b, df.THINjetHadronFlavor, df.THINjetCEmEF, df.THINjetCHadEF, df.THINjetNEmEF, df.THINjetNHadEF, df.THINjetCMulti, df.THINjetNMultiplicity, df.THINjetCorrUncUp, df.THINjetNPV,
                           df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy, df.FATgenjetpx, df.FATgenjetpy, df.FATgenjetpz, df.FATgenjetE, df.FATjetPassIDTight,
-                          df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,
+                          df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc, df.FATjet_particleNet,
                           df.FATjet_prob_bbvsLight, df.FATjet_prob_ccvsLight, df.FATjet_prob_TvsQCD, df.FATjet_prob_WvsQCD, df.FATjet_prob_ZHbbvsQCD,
                           df.FATjetSDmass, df.FATN2_Beta1_, df.FATN2_Beta2_, df.FATjetCHSPRmassL2L3Corr, df.FATjetCHSSDmassL2L3Corr, df.FATjetTau1, df.FATjetTau2)
         for run, lumi, event, isData, mcWeight_, mass_A_, mass_a_,\
@@ -554,12 +555,12 @@ def runbbdm(txtfile):
                 nak4jet_, ak4px_, ak4py_, ak4pz_, ak4e_, ak4bRegNNResolution, ak4bRegNNCorr,ak4PUJetIDLoose,ak4PUJetIDMedium,ak4PUJetIDTight,\
                 ak4PassID_, ak4deepcsv_, ak4flavor_, ak4CEmEF_, ak4CHadEF_, ak4NEmEF_, ak4NHadEF_, ak4CMulti_, ak4NMultiplicity_, ak4JEC_, ak4NPV_,\
                 fatnJet, fatjetPx, fatjetPy, fatjetPz, fatjetEnergy, fatgenjetPx, fatgenjetPy, fatgenjetPz, fatgenjetEnergy, fatjetPassID,\
-                fatjet_DoubleSV, fatjet_probQCDb, fatjet_probHbb, fatjet_probQCDc, fatjet_probHcc, fatjet_probHbbc,\
+                fatjet_DoubleSV, fatjet_probQCDb, fatjet_probHbb, fatjet_probQCDc, fatjet_probHcc, fatjet_probHbbc, fatjet_particleNet,\
                 fatjet_prob_bbvsLight, fatjet_prob_ccvsLight, fatjet_prob_TvsQCD, fatjet_prob_WvsQCD, fatjet_prob_ZHbbvsQCD,\
                 fatjetSDmass, fatN2_Beta1_, fatN2_Beta2_, fatjetCHSPRmassL2L3Corr, fatjetCHSSDmassL2L3Corr, fatjetTau1, fatjetTau2\
                 in var_zip:
             if debug_:
-                print len(trigName_), len(trigResult_), len(filterName), len(filterResult), len(metUnc_), len(elepx_), len(elepy_), len(elepz_), len(elee_), len(elevetoid_), len(elelooseid_), len(eletightid_), len(eleCharge_), npho_, len(phopx_), len(phopy_), len(phopz_), len(phoe_), len(pholooseid_), len(photightID_), nmu_, len(mupx_), len(mupy_), len(mupz_), len(mue_), len(mulooseid_), len(mutightid_), len(muisoloose), len(muisomedium), len(muisotight), len(muisovtight), len(muCharge_), nTau_, len(tau_px_), len(tau_py_), len(tau_pz_), len(tau_e_), len(tau_dm_), len(tau_isLoose_), len(genParId_), len(genMomParId_), len(genParSt_), len(genpx_), len(genpy_), len(genpz_), len(gene_), len(ak4px_), len(ak4py_), len(ak4pz_), len(ak4e_), len(ak4PassID_), len(ak4deepcsv_), len(ak4flavor_), len(ak4CEmEF_), len(ak4CHadEF_), len(ak4NEmEF_), len(ak4NHadEF_), len(ak4CMulti_), len(ak4NMultiplicity_), len(ak4JEC_), len(fatjetPx), len(fatjetPy), len(fatjetPz), len(fatjetEnergy), len(fatjetPassID), len(fatjet_DoubleSV), len(fatjet_probQCDb), len(fatjet_probHbb), len(fatjet_probQCDc), len(fatjet_probHcc), len(fatjet_probHbbc), len(fatjet_prob_bbvsLight), len(fatjet_prob_ccvsLight), len(fatjet_prob_TvsQCD), len(fatjet_prob_WvsQCD), len(fatjet_prob_ZHbbvsQCD), len(fatjetSDmass), len(fatN2_Beta1_), len(fatN2_Beta2_), len(fatjetCHSPRmassL2L3Corr), len(fatjetCHSSDmassL2L3Corr)
+                print len(trigName_), len(trigResult_), len(filterName), len(filterResult), len(metUnc_), len(elepx_), len(elepy_), len(elepz_), len(elee_), len(elevetoid_), len(elelooseid_), len(eletightid_), len(eleCharge_), npho_, len(phopx_), len(phopy_), len(phopz_), len(phoe_), len(pholooseid_), len(photightID_), nmu_, len(mupx_), len(mupy_), len(mupz_), len(mue_), len(mulooseid_), len(mutightid_), len(muisoloose), len(muisomedium), len(muisotight), len(muisovtight), len(muCharge_), nTau_, len(tau_px_), len(tau_py_), len(tau_pz_), len(tau_e_), len(tau_dm_), len(tau_isLoose_), len(genParId_), len(genMomParId_), len(genParSt_), len(genpx_), len(genpy_), len(genpz_), len(gene_), len(ak4px_), len(ak4py_), len(ak4pz_), len(ak4e_), len(ak4PassID_), len(ak4deepcsv_), len(ak4flavor_), len(ak4CEmEF_), len(ak4CHadEF_), len(ak4NEmEF_), len(ak4NHadEF_), len(ak4CMulti_), len(ak4NMultiplicity_), len(ak4JEC_), len(fatjetPx), len(fatjetPy), len(fatjetPz), len(fatjetEnergy), len(fatjetPassID), len(fatjet_DoubleSV), len(fatjet_probQCDb), len(fatjet_probHbb), len(fatjet_probQCDc), len(fatjet_probHcc), len(fatjet_probHbbc), len(fatjet_particleNet), len(fatjet_prob_bbvsLight), len(fatjet_prob_ccvsLight), len(fatjet_prob_TvsQCD), len(fatjet_prob_WvsQCD), len(fatjet_prob_ZHbbvsQCD), len(fatjetSDmass), len(fatN2_Beta1_), len(fatN2_Beta2_), len(fatjetCHSPRmassL2L3Corr), len(fatjetCHSSDmassL2L3Corr)
             if monoh_zpb or bbDM_DMSimp or bbdm_2hdma:
                 if (int(mass_A_) != int(mA_)) and (int(mass_a_) != int(ma_)): continue
             if ieve % 1000 == 0:
@@ -627,8 +628,8 @@ def runbbdm(txtfile):
 
 	    # MET xy-shift corrections
             METXYCorr_Met_MetPhi = ROOT.METXYCorr_Met_MetPhi(type1met_, type1metphi_,int(run),int(args.year), not isData,int(nVtx))
-	    met_    = METXYCorr_Met_MetPhi[0]
-	    metphi_ = METXYCorr_Met_MetPhi[1]
+            met_    = METXYCorr_Met_MetPhi[0]
+            metphi_ = METXYCorr_Met_MetPhi[1]
             # ------------------------------------------------------
             ## PFMET Selection
             # --------------------------------------------------------
@@ -1154,7 +1155,8 @@ def runbbdm(txtfile):
             st_fjetTau21.clear()
             st_fjetCHSPRMass.clear()
             st_fjetCHSSDMass.clear()
-
+            st_fjetParticleNET.clear()
+            
             '''
             st_Taudisc_againstLooseMuon.clear()
             st_Taudisc_againstTightMuon.clear()
@@ -1259,6 +1261,7 @@ def runbbdm(txtfile):
                 st_fjetTau21.push_back(fatjetTau2[ifjet]/fatjetTau1[ifjet])
                 st_fjetCHSPRMass.push_back(fatjetCHSPRmassL2L3Corr[ifjet])
                 st_fjetCHSSDMass.push_back(fatjetCHSSDmassL2L3Corr[ifjet])
+                st_fjetParticleNET.push_back(fatjet_particleNet[ifjet])
                 #print ("fatN2_Beta1_",fatN2_Beta1_[ifjet],"fatN2_Beta2_",fatN2_Beta2_[ifjet])
 
             st_nEle[0] = len(pass_ele_loose_index)
@@ -1387,8 +1390,8 @@ if __name__ == '__main__':
         runbbdm(txtFile)
 
     if runInteractive and runOnTxt:
-	filesPath = dirName+'/*txt'
-	files = glob.glob(filesPath)
+        filesPath = dirName+'/*txt'
+        files = glob.glob(filesPath)
         n = 1  # submit n txt files at a time, make equal to cores
         final = [files[i * n:(i + 1) * n]
                  for i in range((len(files) + n - 1) // n)]
@@ -1401,10 +1404,10 @@ if __name__ == '__main__':
                 pool.map(runbbdm, final[i])
                 pool.close()
                 pool.join()
-	    except Exception as e:
-		print e
-		print "Corrupt file inside input txt file is detected! Skipping this txt file:  ", final[i]
-		continue
+            except Exception as e:
+                print e
+                print "Corrupt file inside input txt file is detected! Skipping this txt file:  ", final[i]
+                continue
 
     if runInteractive and not runOnTxt:
         ''' following part is for interactive running. This is still under testing because output file name can't be changed at this moment '''
